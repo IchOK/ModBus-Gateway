@@ -1,0 +1,100 @@
+{
+  "device": {
+    "hostname": "PowerGatewayServer",
+    "baud": 9600,
+    "update": 5000
+  },
+  "slaves": [
+    {
+      "name": "Arbeitsplatz",
+      "id": 1,
+      "tags": [
+        {
+          "name": "Spannung",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 0,
+          "unit":"V"
+        },{
+          "name": "Strom",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 6,
+          "unit":"A"
+        },{
+          "name": "Leistung",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 12,
+          "unit":"W"
+        },{
+          "name": "Scheinleistung",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 18,
+          "unit":"VA"
+        },{
+          "name": "Blindleistung",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 24,
+          "unit":"VAr"
+        },{
+          "name": "Leistungsfaktor",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 30,
+          "unit":""
+        },{
+          "name": "ImportEnergie",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 72,
+          "unit":"kWh"
+        },{
+          "name": "ExportEnergie",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 74,
+          "unit":"kWh"
+        },{
+          "name": "ImportBlindenergie",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 76,
+          "unit":"kVAh"
+        },{
+          "name": "ExportBlingenergie",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 78,
+          "unit":"kVAh"
+        },{
+          "name": "SummeEnergie",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 342,
+          "unit":"kWh"
+        },{
+          "name": "SummeBlindenergie",
+          "type": "float",
+          "be": true,
+          "func": "ireg",
+          "adr": 344,
+          "unit":"kVAh"
+        }
+      ]
+    }
+  ]
+}
