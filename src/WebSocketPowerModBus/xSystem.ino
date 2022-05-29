@@ -8,20 +8,29 @@
 //-------------------------------------------------------
 const char ArticleSys[] PROGMEM = R"rawliteral(
 <article>
+<header>System Information</header>
+Firmware Version: %FW_VERSION%<br/>
+Firmware Build: %FW_BUILD%<br/>
+Board Name: %BOARD_NAME%<br/>
+Board Version: %BOARD_VERSION%<br/>
+Board Variant: %BOARD_VARIANT%<br/>
+Board MCU: %BOARD_MCU%<br/>
+</article>
+<article>
 <header>Save Config</header>
 <a href="/config.json" download="config.json"><button>Download Config</button></a>
 </article>
 <article>
 <header>Upload Web-Content</header>
 <form method="POST" action="/upload" enctype="multipart/form-data">
-<label for="jsonUpload">Choose a config file or web content:<input type="file" id="jsonUpload" name="jsonUpload" accept="*.json, *.htm, *.html, *.js, *.css"></label>
+<label for="jsonUpload">Choose a config file or web content:<input type="file" id="jsonUpload" name="jsonUpload" accept=".json, .htm, .html, .js, .css"></label>
 <button type="submit">Upload</button>
 </form>
 </article>
 <article>
-<header>Update Firmware</header>
+<header>Firmware</header>
 <form method="POST" action="/update" enctype="multipart/form-data">
-<label for="update">Choose a config file or web content:<input type="file" id="update" name="update" accept="*.bin"></label>
+<label for="update">Choose a Firmware file:<input type="file" id="update" name="update" accept=".bin"></label>
 <button type="submit">Update</button>
 </form>
 </article>
@@ -46,6 +55,24 @@ String procSys(const String& var) {
   }
   if(var == "SECTION"){
     return String(ArticleSys);
+  }
+  if(var == "FW_VERSION"){
+    return String(VERSION);
+  }
+  if(var == "FW_BUILD"){
+    return String(BUILDCOUNT);
+  }
+  if(var == "BOARD_NAME"){
+    return String(ARDUINO_BOARD);
+  }
+  if(var == "BOARD_VERSION"){
+    return String(ARDUINO_ESP8266_RELEASE);
+  }
+  if(var == "BOARD_VARIANT"){
+    return String(BOARD_VARIANT);
+  }
+  if(var == "BOARD_MCU"){
+    return String(BOARD_MCU);
   }
   if(var == "SVG_LOGO"){
     return String(SvgLogo);

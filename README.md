@@ -23,7 +23,7 @@ Das Netzwerk lässt sich über eine eigene Webseite konfigurieren werden oder du
 Die Konfiguration kann jedoch nicht zurück gelesen werden. Auf der WiFi-Webseite werden alle konfigurierten Informationen ausser das Passwort angezeigt.
 ## AP Mode
 Wenn das Modul sich nicht mit dem angegebenen Netzwerk verbinden kann oder noch kein Netzwerk konfiguriert wurde, erstellt es einen SoftAP um die Konfiguration zu ermöglichen. Der SoftAP ist nicht für den Dauerbetrieb gedacht, denn nach einem 5 Minuten Timeout versucht das Modul erneut die Verbindung herzustellen. Dies soll dazu dienen dass sich das Modul selbstständig wieder mit dem Netzwerk verdinget auch wenn dieses zum Boot-Zeitpunkt nicht erreichbar war.  
-> SSID: ModBus_ESP-ChipID  
+> SSID: ModBus_*ESP-ChipID*  
 > PASS: ModBusAdmin
 # ModBus Konfiguration
 Die Konfiguration der ModBus-Schnittstelle kann über die Webseite erfolgen oder durch [hochladen der Konfiguration](#dateien-hochladen) als **config.json**.

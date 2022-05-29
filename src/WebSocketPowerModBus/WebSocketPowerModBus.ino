@@ -1,5 +1,8 @@
 #define ARDUINOJSON_USE_LONG_LONG 1
 
+#define VERSION "1.0"
+#define BUILDCOUNT "2"
+
 #define DEBUG_NONE 0
 #define DEBUG_ERR 1
 #define DEBUG_SETUP 2
@@ -20,10 +23,10 @@
   #include <SPIFFS.h>
 #endif
 #include <ESPAsyncWebServer.h>
-#include <SPIFFSEditor.h>
+//#include <SPIFFSEditor.h>
 #include <WiFiUdp.h>
-//#include <ArduinoOTA.h>
 #include <ModbusRTU.h>
+
 
 //-------------------------------------------------------
 // OTA Web-Upload
