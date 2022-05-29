@@ -22,7 +22,8 @@ IPAddress ConnectSubnet(255,255,255,0);
 #define WIFI_STATE_STA 4
 #define WIFI_STATE_AP 5
 
-#define WIFITIMEOUT 10000
+#define WIFI_DELAY_FAILED 10000
+#define WIFI_DELAY_RECONNECT 300000
 
 String WiFiSSID;
 String WiFiPass;
@@ -33,6 +34,7 @@ bool WiFiDHCP;
 
 uint8_t WiFiState = WIFI_STATE_INIT;
 uint32_t WiFiBusyTimer;
+uint32_t WiFiReconnectTimer;
 
 DynamicJsonDocument JWifiDoc(1000);
 File ConfigFile;
@@ -327,7 +329,7 @@ bool getWifiStation() {
           Serial.print(".");
         #endif
         digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-        if (millis() - WiFiBusyTimer > 10000) {
+        if (millis() - WiFiBusyTimer > WIFI_DELAY_FAILED) {
           #if DEBUG_SERIAL >= DEBUG_SETUP
             Serial.println(" FAILED");
           #endif
@@ -352,11 +354,12 @@ bool getWifiStation() {
         request->redirect(CONNECT_PATH);
       });
       WiFiState = WIFI_STATE_AP;
+      WiFiReconnectTimer = millis();
       break;
       
     case WIFI_STATE_STA:
       //-----------------------------
-      // Connected to AP
+      // Connected to STA
       //-----------------------------
       digitalWrite(LED_BUILTIN, HIGH);
       break;
@@ -366,6 +369,12 @@ bool getWifiStation() {
       // Connected to AP
       //-----------------------------
       digitalWrite(LED_BUILTIN, LOW);
+      if (WiFi.softAPgetStationNum() > 0) {
+        WiFiReconnectTimer = millis();
+      } else if (millis() - WiFiReconnectTimer > WIFI_DELAY_RECONNECT) {
+        WiFiBusyTimer = millis();
+        WiFiState = WIFI_STATE_CONNECT;
+      }
       break;
       
   }
