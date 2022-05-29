@@ -9,7 +9,7 @@ Als Netzwerkschnittstelle fungiert das standardmäsige WiFi des ESP. Dies hat de
 ## Konfiguration
 Alle Einstellungen können über die integrierte Webseite erfolgen.
 # WiFi Konfiguration
-Das Netzwerk lässt sich über eine eigene Webseite konfigurieren werden oder durch [hochladen der Konfiguration](#dateien-hochladen) als wifi.json.
+Das Netzwerk lässt sich über eine eigene Webseite konfigurieren werden oder durch [hochladen der Konfiguration](#dateien-hochladen) als **wifi.json**.
 ```json
 {
   "ssid":"your_ssid",
@@ -21,8 +21,12 @@ Das Netzwerk lässt sich über eine eigene Webseite konfigurieren werden oder du
 }
 ```
 Die Konfiguration kann jedoch nicht zurück gelesen werden. Auf der WiFi-Webseite werden alle konfigurierten Informationen ausser das Passwort angezeigt.
+## AP Mode
+Wenn das Modul sich nicht mit dem angegebenen Netzwerk verbinden kann oder noch kein Netzwerk konfiguriert wurde, erstellt es einen SoftAP um die Konfiguration zu ermöglichen. Der SoftAP ist nicht für den Dauerbetrieb gedacht, denn nach einem 5 Minuten Timeout versucht das Modul erneut die Verbindung herzustellen. Dies soll dazu dienen dass sich das Modul selbstständig wieder mit dem Netzwerk verdinget auch wenn dieses zum Boot-Zeitpunkt nicht erreichbar war.  
+> SSID: ModBus_ESP-ChipID  
+> PASS: ModBusAdmin
 # ModBus Konfiguration
-Die Konfiguration der ModBus-Schnittstelle kann über die Webseite erfolgen oder durch [hochladen der Konfiguration](#dateien-hochladen) als config.json.
+Die Konfiguration der ModBus-Schnittstelle kann über die Webseite erfolgen oder durch [hochladen der Konfiguration](#dateien-hochladen) als **config.json**.
 Die Modul spezifischen Einstellungen sind nur über die Konfigurationsdatei möglich, über die Webseite können nur die Slaves und Datenpunkte definiert werden.
 ## Modul
 In der Modulkonfiguratio lassen sie der Hostname, die Baud-Rate und das Websocket-Updateinterval einstellen. Existiert keine Konfigurationsdatei werden die unten dargestellten Defaultwerte verwendet.
@@ -67,14 +71,15 @@ ModBus unterscheidet zwischen vier Funktionstypen, für **func** sind diese Wert
 - ireg : Eingangs-Register (3xxxxx)
 - hreg : Ein-/Ausgangs-Register (4xxxxx)
 
-Die Adresse wird in den meisten Dokumentationen als Adress-Register (z.B. 300001) angegeben, wobei es sich hierbei um das erste Register der Funktion 3xxxxx handelt. Beim Wert **adr** handelt es sich jedoch um den Offset, dieser beginnt bei 0.
-
+Die Adresse wird in den meisten Dokumentationen als Adress-Register (z.B. 300001) angegeben, wobei es sich hierbei um das erste Register der Funktion 3xxxxx handelt. Beim Wert **adr** handelt es sich jedoch um den Offset, dieser beginnt bei 0.  
 Das Adress-Register 30025 entsprich somit func = ireg, adr = 24.
 
 # System Funktionen
-Die System-Funktionen und auch die  WiFi Einstellungen sind Passwort geschützt. Das Passwort ist hart codiert (admin/admin) und dient eher dazu dass keine Gäste im WLAN etwas "zerstören" können.
+Die System-Funktionen und auch die  WiFi Einstellungen sind Passwort geschützt. Das Passwort ist hart codiert und dient eher dazu dass keine Gäste im WLAN etwas "zerstören" können.  
+> User: admin  
+> Pass: admin
 ## Konfigration sichern
-Hier läst sich die aktuelle ModBus Konfiguration als config.json herunterladen. Dies kann zur Datensicherung oder zum Editieren/Erweitern der Konfiguration dienen.
+Hier läst sich die aktuelle ModBus Konfiguration als **config.json** herunterladen. Dies kann zur Datensicherung oder zum Editieren/Erweitern der Konfiguration dienen.
 ## Dateien hochladen
 Über die Upload-Funktion können beliebige Dateien hochgeladen werden. Auf diesem Weg kann die Webseite oder deren Erscheinug angepasst werden oder auch Konfigurations-Dateien direkt geschrieben werden.
 Es sollte darauf geachtet werden dass der Speicher des Kontrollers eingeschränkt ist, default sind 2MB.
